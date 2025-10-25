@@ -1,0 +1,15 @@
+ai-learning-tutor/
+├── index.html
+├── styles/
+│ └── main.css
+
+├── scripts/
+│ ├── app.js
+│ ├── ai-tutor.js
+│ └── learning-engine.js
+├── api/
+│ └── chat.js (Vercel serverless function)
+├── data/
+│ └── courses.json
+├── vercel.json
+└── README.md
