@@ -16,8 +16,8 @@ if (!message) {
 return res.status(400).json({ error: 'Message is required' });
 }
 // Get Groq API key from environment variables
-const groqApiKey = process.env.GROQ_API_KEY || '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';
-if (!groqApiKey || groqApiKey === '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') {
+const groqApiKey = process.env.GROQ_API_KEY || '';
+if (!groqApiKey || groqApiKey === '') {
 return res.status(500).json({ error: 'Groq API key not configured' });
 }
 const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
