@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Learning Tutor - Personalized Education</title>
+<link rel="stylesheet" href="styles/main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&dis
+play=swap" rel="stylesheet">
+<meta name="description" content="AI-powered personalized learning platform
+with adaptive tutoring">
+</head>
+<body>
+<div class="app-container">
+<!-- Navigation Header -->
+<header class="app-header">
+<nav class="navbar">
+<div class="nav-brand">
+<h1>🎓 AI Learning Tutor</h1>
+<p>Personalized education powered by AI</p>
+</div>
+<div class="nav-controls">
+<div class="learning-streak">
+<span class="streak-icon">🔥</span>
+<span class="streak-count" id="streakCount">7</span>
+<span class="streak-label">day streak</span>
+</div>
+<div class="user-level">
+<span class="level-icon">⭐</span>
+<span class="level-text" id="userLevel">Level 12</span>
+</div>
+</div>
+</nav>
+</header>
+<!-- Learning Dashboard -->
+<section class="dashboard-section">
+<div class="dashboard-grid">
+<!-- Progress Overview -->
+<div class="dashboard-card progress-card">
+<div class="card-header">
+<h3>📊 Learning Progress</h3>
+<span class="progress-percentage" id="overallProgress">73%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 73%"></div>
+</div>
+<div class="progress-stats">
+<div class="stat">
+<span class="stat-value" id="completedLessons">24</span>
+<span class="stat-label">Lessons Completed</span>
+</div>
+<div class="stat">
+<span class="stat-value" id="studyTime">18h</span>
+<span class="stat-label">Study Time</span>
+</div>
+<div class="stat">
+<span class="stat-value" id="skillsLearned">12</span>
+<span class="stat-label">Skills Mastered</span>
+</div>
+</div>
+</div>
+<!-- AI Tutor Chat -->
+<div class="dashboard-card tutor-card">
+<div class="card-header">
+<h3>🤖 Your AI Tutor</h3>
+<span class="tutor-status online">Online</span>
+</div>
+<div class="tutor-avatar">
+<div class="avatar-image">🎓</div>
+<div class="avatar-info">
+<h4>Professor AI</h4>
+<p>Your personal learning companion</p>
+</div>
+</div>
+<div class="quick-help">
+<h5>Quick Help Options:</h5>
+<div class="help-buttons">
+<button class="help-btn" data-query="Explain this concept in simple
+terms">📝 Explain</button>
+<button class="help-btn" data-query="Give me practice problems">💪
+Practice</button>
+<button class="help-btn" data-query="What should I study next?">🎯
+Next Topic</button>
+<button class="help-btn" data-query="Test my knowledge">🧠 Quiz
+Me</button>
+</div>
+</div>
+</div>
+<!-- Current Course -->
+<div class="dashboard-card course-card">
+<div class="card-header">
+<h3>📚 Current Course</h3>
+<span class="course-progress">4/7 modules</span>
+</div>
+<div class="course-info">
+<h4>Advanced JavaScript Concepts</h4>
+<p>Master closures, promises, and async programming</p>
+<div class="course-meta">
+<span class="difficulty">🔥 Intermediate</span>
+<span class="estimated-time">⏱ 2h remaining</span>
+</div>
+</div>
+<button class="continue-btn" id="continueLesson">Continue
+Learning</button>
+</div>
+<!-- Achievements -->
+<div class="dashboard-card achievements-card">
+<div class="card-header">
+<h3>🏆 Recent Achievements</h3>
+<a href="#" class="view-all">View All</a>
+</div>
+<div class="achievements-list">
+<div class="achievement">
+<span class="achievement-icon">🎯</span>
+<div class="achievement-info">
+<h5>Problem Solver</h5>
+<p>Completed 10 coding challenges</p>
+</div>
+</div>
+<div class="achievement">
+<span class="achievement-icon">📈</span>
+<div class="achievement-info">
+<h5>Quick Learner</h5>
+<p>Finished module in record time</p>
+</div>
+</div>
+<div class="achievement">
+<span class="achievement-icon">🔥</span>
+<div class="achievement-info">
+<h5>Streak Master</h5>
+<p>7 days of consistent learning</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Learning Section -->
+<section class="learning-section">
+<div class="learning-container">
+<!-- AI Chat Interface -->
+<div class="chat-panel">
+<div class="chat-header">
+<h3>💬 Ask Your AI Tutor Anything</h3>
+<p>Get personalized explanations, practice problems, and learning
+guidance</p>
+</div>
+<div class="chat-messages" id="chatMessages">
+<div class="message ai-message">
+<div class="message-avatar">🎓</div>
+<div class="message-content">
+<p>Hello! I'm your AI Learning Tutor. I'm here to help you master any
+topic with personalized explanations and practice. What would you like to learn
+today?</p>
+<div class="message-suggestions">
+<button class="suggestion-chip">Explain JavaScript
+closures</button>
+<button class="suggestion-chip">Practice Python loops</button>
+<button class="suggestion-chip">Quiz me on data
+structures</button>
+<button class="suggestion-chip">Help with calculus</button>
+</div>
+</div>
+</div>
+</div>
+<div class="chat-input-area">
+<div class="input-container">
+<input type="text" id="chatInput" placeholder="Ask me anything... (e.g.,
+'Explain recursion with examples')" maxlength="500">
+<button id="sendMessage" class="send-btn">
+<span class="send-icon">📤</span>
+</button>
+</div>
+<div class="input-tools">
+<button class="tool-btn" id="voiceInput">🎤 Voice</button>
+<button class="tool-btn" id="uploadImage">📷 Image</button>
+<button class="tool-btn" id="codeHelper">💻 Code</button>
+</div>
+</div>
+</div>
+<!-- Learning Content Panel -->
+<div class="content-panel">
+<div class="content-header">
+<h3>📖 Interactive Learning Content</h3>
+<div class="content-controls">
+<button class="control-btn active"
+data-mode="lesson">Lesson</button>
+<button class="control-btn" data-mode="practice">Practice</button>
+<button class="control-btn" data-mode="quiz">Quiz</button>
+</div>
+</div>
+<div class="content-area" id="contentArea">
+<!-- Lesson Mode Content -->
+<div class="lesson-content active" id="lessonContent">
+<div class="lesson-header">
+<h4>JavaScript Closures: A Deep Dive</h4>
+<div class="lesson-meta">
+<span class="difficulty-badge intermediate">Intermediate</span>
+<span class="time-estimate">⏱ 15 min read</span>
+<span class="progress-indicator">3/5 sections</span>
+</div>
+</div>
+<div class="lesson-body">
+<div class="concept-explanation">
+<h5>What are Closures?</h5>
+<p>A closure is a feature in JavaScript where an inner function has
+access to the outer (enclosing) function's variables. This includes:</p>
+<ul>
+<li>Variables from the outer function's scope</li>
+<li>Global variables</li>
+<li>The outer function's parameters</li>
+</ul>
+</div>
+<div class="code-example">
+<h5>Interactive Example:</h5>
+<div class="code-block">
+<pre><code>function outerFunction(x) {
+// This is the outer function's scope
+function innerFunction(y) {
+// This inner function has access to 'x'
+return x + y;
+}
+return innerFunction;
+}
+const addFive = outerFunction(5);
+console.log(addFive(3)); // Output: 8</code></pre>
+</div>
+<button class="run-code-btn">▶ Run Code</button>
+</div>
+<div class="ai-insight">
+<div class="insight-icon">💡</div>
+<div class="insight-content">
+<h5>AI Insight</h5>
+<p>Think of closures like a backpack that a function carries.
+Even when the function travels to different parts of your code, it still has access to
+everything in its backpack (the outer scope variables).</p>
+</div>
+</div>
+<div class="comprehension-check">
+<h5>Quick Check: Do you understand?</h5>
+<div class="understanding-buttons">
+<button class="understanding-btn yes">✅ Yes, I get it!</button>
+<button class="understanding-btn maybe">🤔
+Somewhat</button>
+<button class="understanding-btn no">❌ Need more
+help</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Practice Mode Content -->
+<div class="practice-content" id="practiceContent">
+<div class="practice-header">
+<h4>🏋 Practice Problems</h4>
+<div class="practice-stats">
+<span>Problem 2 of 5</span>
+<span class="accuracy">Accuracy: 85%</span>
+</div>
+</div>
+<div class="problem-statement">
+<h5>Create a Counter Function</h5>
+<p>Write a function that returns another function. The returned
+function should increment and return a counter each time it's called.</p>
+</div>
+<div class="code-editor">
+<textarea id="codeEditor" placeholder="// Write your solution here
+function createCounter() {
+// Your code here
+}
+// Test your function
+const counter = createCounter();
+console.log(counter()); // Should output 1
+console.log(counter()); // Should output 2"></textarea>
+<div class="editor-controls">
+<button class="editor-btn" id="runCode">▶ Run</button>
+<button class="editor-btn" id="checkSolution">✅ Check</button>
+<button class="editor-btn" id="getHint">💡 Hint</button>
+</div>
+</div>
+<div class="output-panel" id="outputPanel">
+<h6>Output:</h6>
+<div class="output-content" id="outputContent">
+<!-- Code execution results will appear here -->
+</div>
+</div>
+</div>
+<!-- Quiz Mode Content -->
+<div class="quiz-content" id="quizContent">
+<div class="quiz-header">
+<h4>🧠 Knowledge Quiz</h4>
+<div class="quiz-progress">
+<span>Question 3 of 10</span>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 30%"></div>
+</div>
+</div>
+</div>
+<div class="quiz-question">
+<h5>Which statement about closures is correct?</h5>
+<div class="quiz-options">
+<label class="quiz-option">
+<input type="radio" name="quiz-answer" value="a">
+<span class="option-text">Closures only have access to global
+variables</span>
+</label>
+<label class="quiz-option">
+<input type="radio" name="quiz-answer" value="b">
+<span class="option-text">Inner functions can access outer
+function variables even after the outer function returns</span>
+</label>
+<label class="quiz-option">
+<input type="radio" name="quiz-answer" value="c">
+<span class="option-text">Closures are only available in
+ES6+</span>
+</label>
+<label class="quiz-option">
+<input type="radio" name="quiz-answer" value="d">
+<span class="option-text">Closures prevent memory
+leaks</span>
+</label>
+</div>
+<button class="submit-answer-btn" id="submitAnswer">Submit
+Answer</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Learning Path Section -->
+<section class="learning-path-section">
+<div class="path-header">
+<h2>🗺 Your Personalized Learning Path</h2>
+<p>AI-curated curriculum based on your goals and progress</p>
+</div>
+<div class="learning-path">
+<div class="path-node completed">
+<div class="node-icon">✅</div>
+<div class="node-content">
+<h4>JavaScript Basics</h4>
+<p>Variables, functions, loops</p>
+<span class="node-status">Completed</span>
+</div>
+</div>
+<div class="path-connector completed"></div>
+<div class="path-node completed">
+<div class="node-icon">✅</div>
+<div class="node-content">
+<h4>DOM Manipulation</h4>
+<p>Selecting and modifying elements</p>
+<span class="node-status">Completed</span>
+</div>
+</div>
+<div class="path-connector completed"></div>
+<div class="path-node current">
+<div class="node-icon">🎯</div>
+<div class="node-content">
+<h4>Advanced Concepts</h4>
+<p>Closures, promises, async/await</p>
+<span class="node-status">In Progress</span>
+</div>
+</div>
+<div class="path-connector"></div>
+<div class="path-node upcoming">
+<div class="node-icon">🔒</div>
+<div class="node-content">
+<h4>React Fundamentals</h4>
+<p>Components, state, props</p>
+<span class="node-status">Locked</span>
+</div>
+</div>
+<div class="path-connector"></div>
+<div class="path-node upcoming">
+<div class="node-icon">🔒</div>
+<div class="node-content">
+<h4>Full-Stack Project</h4>
+<p>Build a complete application</p>
+<span class="node-status">Locked</span>
+</div>
+</div>
+</div>
+<div class="path-recommendations">
+<div class="recommendation-card">
+<div class="rec-icon">🎯</div>
+<div class="rec-content">
+<h4>AI Recommendation</h4>
+<p>Based on your progress, spend extra time on async programming
+concepts. This will prepare you well for React's useEffect hook.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="app-footer">
+<div class="footer-content">
+<div class="footer-section">
+<h4>AI Learning Tutor</h4>
+<p>Personalized education powered by artificial intelligence</p>
+</div>
+<div class="footer-section">
+<h5>Features</h5>
+<ul>
+<li>Adaptive Learning</li>
+<li>24/7 AI Tutor</li>
+<li>Progress Tracking</li>
+<li>Interactive Practice</li>
+</ul>
+</div>
+<div class="footer-section">
+<h5>Learning</h5>
+<ul>
+<li>Programming</li>
+<li>Mathematics</li>
+<li>Science</li>
+<li>Languages</li>
+</ul>
+</div>
+<div class="footer-section">
+<h5>Support</h5>
+<ul>
+<li>Help Center</li>
+<li>Community</li>
+<li>Feedback</li>
+<li>Contact</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2024 AI Learning Tutor. Empowering learners worldwide.</p>
+</div>
+</footer>
+</div>
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+<div class="loading-content">
+<div class="loading-spinner"></div>
+<h3>AI Tutor is Thinking...</h3>
+<p id="loadingMessage">Processing your question...</p>
+<div class="loading-dots">
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<script src="scripts/learning-engine.js"></script>
+<script src="scripts/ai-tutor.js"></script>
+<script src="scripts/app.js"></script>
+</body>
+</html>
